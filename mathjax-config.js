@@ -27,8 +27,12 @@ const renderTeXInTweets = () => {
           text.substring(start - 6, end + 3), ""
         );
         tweet.appendChild(texContainer);
-        MathJax.typesetPromise();
-        console.log("tex")
+        const element = document.querySelector('[data-testid="primaryColumn"]');
+        if (element) {
+          window.MathJax.typesetPromise([element])
+            .then(() => console.log("MathJax rendering successful."))
+            .catch((err) => console.error("MathJax rendering error:", err));
+        } else MathJax.typesetPromise();
       }
     }
   });
