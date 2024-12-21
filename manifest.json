@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "Twitter TeX Renderer",
+  "version": "1.0",
+  "description": "Render TeX in tweets enclosed with ```tex``` using MathJax.",
+  "permissions": ["activeTab", "scripting"],
+  "host_permissions": ["https://twitter.com/*","https://x.com/*"],
+  "web_accessible_resources": [
+    {
+      "resources": ["math-jax/es5/*", "mathjax-config.js"],
+      "matches": ["*://x.com/*", "*://twitter.com/*"]
+    }
+  ],
+  "content_scripts": [
+    {
+      "matches": ["*://x.com/*","*://twitter.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self';"
+  }
+}
